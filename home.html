@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - AL-Hossam-Hassan</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="config.js"></script>
+    <style>
+      /* --- استايل صورة البروفايل الاحترافي --- */
+      .profile-container {
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%; /* دائرية */
+        object-fit: cover;
+        border: 4px solid var(--acc);
+        box-shadow: 0 0 20px var(--acc-glow); /* توهج حول الصورة */
+        transition: transform 0.5s ease;
+        background: #1e293b; /* خلفية مؤقتة لحد ما تحط صورتك */
+      }
+
+      .profile-img:hover {
+        transform: rotate(5deg) scale(1.05);
+      }
+
+      /* تأثير النص المتدرج للاسم */
+      .hero-name {
+        /* 1. تحديد الخلفية المتدرجة */
+        background: linear-gradient(90deg, #3b82f6, #2dd4bf);
+
+        /* 2. قص الخلفية على حدود الحروف (السطر اللي كان فيه المشكلة) */
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        /* 3. جعل لون النص الأصلي شفافاً لإظهار الخلفية من تحته (مهم جداً!) */
+        -webkit-text-fill-color: transparent;
+        color: transparent; /* fallback للمتصفحات اللي مش بتدعم text-fill */
+      }
+
+      .badge {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--acc);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        border: 1px solid var(--acc);
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      /* تحسين الأزرار */
+      .btn-group {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="home.html" class="active">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html">Tools</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <header class="top">
+      <div class="profile-container">
+        <img
+          src="me.jpg"
+          alt="Hossam Hassan"
+          class="profile-img"
+          id="profilePic"
+        />
+      </div>
+      <h1 class="hero-name" id="devName">الحسام حسن</h1>
+      <div class="badge">Science Teacher & Full-Stack Developer</div>
+      <p>مرحباً بك في Dev Hub الخاص بي — حيث يجتمع العلم بالبرمجة</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>عن الحسام 👨‍🏫💻</h2>
+        <p style="color: var(--mut); line-height: 1.8">
+          أنا مدرس علوم متخصص في المرحلة الإعدادية ومطور ويب شغوف. هدفي هو تبسيط
+          المفاهيم المعقدة، سواء كانت في "الفيزياء" أو في "أكواد الـ
+          JavaScript". هنا هتلاقي خلاصة تجاربي في التعليم والبرمجة.
+        </p>
+        <div class="btn-group">
+          <a class="btn" href="projects.html">معرض الأعمال</a>
+          <a class="btn btn-outline" href="index.html">الأدوات الذكية</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>إحصائيات سريعة 📊</h2>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+          "
+        >
+          <div
+            style="
+              background: rgba(15, 23, 42, 0.5);
+              padding: 15px;
+              border-radius: 12px;
+              text-align: center;
+            "
+          >
+            <h3 style="color: var(--acc); margin: 0">+10</h3>
+            <small style="color: var(--mut)">مشاريع ويب</small>
+          </div>
+          <div
+            style="
+              background: rgba(15, 23, 42, 0.5);
+              padding: 15px;
+              border-radius: 12px;
+              text-align: center;
+            "
+          >
+            <h3 style="color: var(--acc); margin: 0">+100</h3>
+            <small style="color: var(--mut)">طالب متفاعل</small>
+          </div>
+        </div>
+        <a
+          class="btn btn-outline"
+          href="contact.html"
+          style="width: 100%; margin-top: 20px; text-align: center"
+          >تواصل معي الآن</a
+        >
+      </section>
+    </main>
+
+    <script>
+      // جلب الاسم من ملف config.js لضمان التطابق
+      window.onload = () => {
+        if (typeof appConfig !== "undefined") {
+          document.getElementById("devName").textContent =
+            appConfig.developerNameAr;
+        }
+      };
+    </script>
+  </body>
+</html>

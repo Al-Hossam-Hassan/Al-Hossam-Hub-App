@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>أدوات الحسام - AL-Hossam Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* --- استايلات خاصة بصفحة الأدوات لضمان الإبهار --- */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        display: none; /* يتم تغييره بـ JS */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+        transition: opacity 0.4s ease;
+      }
+      .modal-content {
+        background: var(--card, #1e293b);
+        padding: 40px;
+        border-radius: 24px;
+        text-align: center;
+        border: 1px solid var(--acc, #3b82f6);
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        animation: scaleIn 0.3s ease-out;
+      }
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .modal-icon {
+        font-size: 60px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      /* تحسين المسافات في الكروت */
+      .card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .row.checks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      .row.checks label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        color: var(--mut);
+      }
+
+      .out {
+        min-height: 40px;
+        background: #0b1220;
+        border: 1px dashed var(--acc);
+        color: #10b981;
+        padding: 12px;
+        border-radius: 12px;
+        font-family: monospace;
+        word-break: break-all;
+        margin-top: 10px;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="welcome-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="modal-icon">🚀</span>
+        <h2>مرحباً بك في AL-Hossam Hub</h2>
+        <p style="color: var(--mut); margin-bottom: 25px">
+          مجموعة أدوات المطور الحسام حسن بين يديك الآن. جاهز تبدأ؟
+        </p>
+        <button onclick="closeWelcome()" class="btn">ابدأ الآن</button>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="home.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html" class="active">Tools</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <header class="top">
+      <h1>أدوات المطور - الحسام حسن</h1>
+      <p>كل ما تحتاجه من أدوات برمجية في مكان واحد</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Password Generator 🔑</h2>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <label>الطول:</label>
+          <input
+            id="len"
+            type="number"
+            min="8"
+            max="32"
+            value="16"
+            style="width: 80px"
+          />
+        </div>
+        <div class="row checks">
+          <label><input id="up" type="checkbox" checked /> A-Z</label>
+          <label><input id="low" type="checkbox" checked /> a-z</label>
+          <label><input id="num" type="checkbox" checked /> 0-9</label>
+          <label><input id="sym" type="checkbox" checked /> !@#</label>
+        </div>
+        <button id="gen" class="btn">توليد كلمة سر</button>
+        <pre id="out" class="out">النتيجة ستظهر هنا...</pre>
+      </section>
+
+      <section class="card">
+        <h2>QR Code Generator 📱</h2>
+        <input id="qr-input" type="text" placeholder="اكتب الرابط هنا..." />
+        <button id="qr-gen" class="btn">إنشاء QR Code</button>
+        <div
+          id="qr-out"
+          style="margin-top: 15px; text-align: center; min-height: 100px"
+        ></div>
+      </section>
+
+      <section class="card">
+        <h2>JSON Formatter 🛠️</h2>
+        <textarea id="jsonIn" placeholder='{"key":"value"}'></textarea>
+        <button id="fmt" class="btn">تنسيق JSON</button>
+        <pre id="jsonOut" class="out">النتيجة هنا...</pre>
+      </section>
+
+      <section class="card">
+        <h2>Text Cleaner ✨</h2>
+        <textarea
+          id="txt-in"
+          placeholder="الصق النص هنا لإزالة المسافات الزائدة..."
+        ></textarea>
+        <div style="display: flex; gap: 10px; margin-top: 10px">
+          <button id="txt-clean" class="btn">تنظيف النص</button>
+          <button id="txt-copy" class="btn btn-outline">نسخ</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+
+    <script>
+      // وظيفة رسالة الترحيب الاحترافية
+      function closeWelcome() {
+        const modal = document.getElementById("welcome-modal");
+        modal.style.opacity = "0";
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 400);
+        sessionStorage.setItem("welcomeShown", "true");
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        if (!sessionStorage.getItem("welcomeShown")) {
+          const modal = document.getElementById("welcome-modal");
+          modal.style.display = "flex";
+        }
+      });
+    </script>
+  </body>
+</html>

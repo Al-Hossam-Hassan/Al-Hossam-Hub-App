@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact - AL-Hossam-Hassan</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="home.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="index.html">Tools</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <header class="top">
+      <h1>تواصل معايا</h1>
+      <p>الحسام حسن — AL-Hossam-Hassan</p>
+    </header>
+
+    <main class="grid" id="grid"></main>
+
+    <script>
+      window.onload = function () {
+        // التأكد من جلب البيانات من appConfig الصحيح
+        const c = appConfig.contact;
+        const grid = document.getElementById("grid");
+
+        // تجهيز رسالة واتساب مشفرة
+        const whatsappMsg = encodeURIComponent(
+          "أهلاً أستاذ حسام، كنت حابب أستفسر عن خدماتك البرمجية.",
+        );
+
+        const items = [
+          {
+            t: "WhatsApp",
+            s: c.phone,
+            u: `https://wa.me/2${c.phone}?text=${whatsappMsg}`,
+            i: "🟢",
+          },
+          {
+            t: "Telegram",
+            s: c.telegram,
+            u: "https://t.me/" + c.telegram.replace("@", ""),
+            i: "🔹",
+          },
+          {
+            t: "Facebook",
+            s: "Hossam Hassan",
+            u: c.facebook,
+            i: "🔵",
+          },
+          {
+            t: "Gmail",
+            s: c.email,
+            u: "mailto:" + c.email,
+            i: "📧",
+          },
+        ];
+
+        grid.innerHTML = items
+          .map(
+            (it) => `
+          <section class="card contact-card">
+            <div style="font-size:2.5rem; margin-bottom:10px">${it.i}</div>
+            <h2>${it.t}</h2>
+            <p class="desc">${it.s}</p>
+            <a class="btn" target="_blank" href="${it.u}">فتح الرابط</a>
+          </section>
+        `,
+          )
+          .join("");
+      };
+    </script>
+
+    <style>
+      /* استايل الصفحة الحالية في النيف بار */
+      .nav a.active {
+        border-bottom: 2px solid #3b82f6;
+        color: #3b82f6;
+      }
+
+      .contact-card {
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid #334155;
+        background: #1e293b;
+        padding: 30px 20px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-10px);
+        border-color: #3b82f6;
+        background: #24334d;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn {
+        background: #3b82f6;
+        color: #fff;
+        text-decoration: none;
+        padding: 12px 30px;
+        border-radius: 12px;
+        margin-top: 20px;
+        font-weight: bold;
+        transition: 0.3s ease;
+        width: 80%;
+      }
+
+      .btn:hover {
+        background: #2563eb;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+      }
+
+      .desc {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-top: 8px;
+        word-break: break-all;
+      }
+
+      h2 {
+        color: #f8fafc;
+        margin-top: 10px;
+      }
+    </style>
+  </body>
+</html>

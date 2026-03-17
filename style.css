@@ -1,0 +1,206 @@
+/* -- إعدادات الألوان الأساسية -- */
+:root {
+  --bg: #0f172a;           /* خلفية غامقة فخمة */
+  --card: #1e293b;         /* لون الكارت */
+  --card-hover: #24334d;   /* لون الكارت عند الوقوف عليه */
+  --txt: #f8fafc;          /* لون النص الأساسي */
+  --mut: #94a3b8;          /* لون النص الهادئ */
+  --acc: #3b82f6;          /* اللون الأزرق المميز */
+  --acc-glow: rgba(59, 130, 246, 0.4);
+  --grad: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+/* -- التنسيق العام -- */
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+body {
+  margin: 0;
+  direction: rtl; /* اتجاه عربي */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+  color: var(--txt);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* -- الهيدر (العنوان العلوي) -- */
+.top {
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+.top h1 {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  -webkit-background-clip: text; /* بتقص الخلفية على قد حروف النص */
+  -webkit-text-fill-color: transparent; /* بتخلي لون النص شفاف عشان الخلفية (التدرج) تظهر */
+  
+  /* للأمان وعشان المتصفحات التانية */
+  background-clip: text; 
+  color: transparent; 
+}
+
+.top p {
+  margin: 5px 0 0;
+  color: var(--mut);
+  font-size: 14px;
+}
+
+/* -- النافيجيشن (القائمة) -- */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: #0b1220;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #24324a;
+}
+
+.nav a {
+  color: var(--mut);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  border: 1px solid transparent;
+}
+
+.nav a:hover, .nav a.active {
+  color: #fff;
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--acc);
+}
+
+/* -- الشبكة (Grid) -- */
+.grid {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* -- الكروت (Cards) -- */
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: var(--acc);
+  box-shadow: 0 10px 30px var(--acc-glow);
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #fff;
+}
+
+/* -- الأزرار -- */
+button, .btn {
+  background: var(--grad);
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  box-shadow: 0 4px 12px var(--acc-glow);
+}
+
+button:hover, .btn:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+/* -- المدخلات (Inputs) -- */
+input[type="number"], input[type="text"], textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #2b3b55;
+  background: #0b1220;
+  color: var(--txt);
+  margin-bottom: 10px;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--acc);
+}
+
+/* -- النتائج والتاجات -- */
+.out {
+  background: #0b1220;
+  border: 1px solid #2b3b55;
+  border-radius: 12px;
+  padding: 15px;
+  font-family: monospace;
+  color: #10b981; /* أخضر للنتائج */
+  word-break: break-all;
+}
+
+.tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.tag {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--acc);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  border: 1px solid var(--acc);
+}
+
+/* -- ميديا كويري للموبايل -- */
+@media (max-width: 480px) {
+  .grid { grid-template-columns: 1fr; }
+  .top h1 { font-size: 22px; }
+}
+/* -- أيقونات المشاريع الاحترافية -- */
+.project-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--grad); /* التدرج الأزرق */
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px var(--acc-glow); /* توهج خفيف */
+}
+
+/* بنستخدم الـ Mask عشان نلون الـ SVG المدمج */
+.project-icon-svg {
+  width: 24px;
+  height: 24px;
+  background-color: white; /* لون الأيقونة الداخلي */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* أيقونة الفولدر المودرن (كود SVG مدمج كـ Base64 لسرعة التحميل) */
+.icon-folder {
+  -webkit-mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIgMTlBMiAyIDAgMCAxIDIwIDIxSDRBMiAyIDAgMCAxIDIgMTlWMUEyIDAgMCAxIDQgNUgyMEEyIDAgMCAxIDIyIDdaIi8+PHBhdGggZD0iTTIgOVgxMEwxMiAxMUgyMiIvPjwvc3ZnPg==');
+  mask-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIgMTlBMiAyIDAgMCAxIDIwIDIxSDRBMiAyIDAgMCAxIDIgMTlWMUEyIDAgMCAxIDQgNUgyMEEyIDAgMCAxIDIyIDdaIi8+PHBhdGggZD0iTTIgOVgxMEwxMiAxMUgyMiIvPjwvc3ZnPg==');
+}
