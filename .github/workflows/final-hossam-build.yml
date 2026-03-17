@@ -1,0 +1,42 @@
+name: Global Build APK
+on: [push]
+jobs:
+  android-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Clean & Prepare
+        run: |
+          # مسح شامل لكل ملفات الإعدادات القديمة عشان ميعلقش
+          rm -rf www android capacitor.config.* package-lock.json node_modules
+          mkdir -p www
+          # نقل ملفاتك للـ www (الـ HTML والـ CSS والـ JS وصورتك)
+          cp -r [!.]* www/ || true
+
+      - name: Install Dependencies
+        run: npm install @capacitor/core @capacitor/cli @capacitor/android
+
+      - name: Create Fresh Config
+        run: |
+          # إنشاء إعدادات جديدة باسم "HossamHub" وهوية جديدة "com.hossam.portfolio"
+          npx cap init "HossamHub" "com.hossam.portfolio" --web-dir www
+          npx cap add android
+          npx cap copy android
+          
+      - name: Build Android APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Download Link
+        uses: actions/upload-artifact@v4
+        with:
+          name: Hossam-App-Package
+          path: android/app/build/outputs/apk/debug/app-debug.apk
